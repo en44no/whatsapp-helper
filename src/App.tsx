@@ -13,7 +13,7 @@ function App() {
   }
 
   return (
-    <div className="flex justify-center items-center w-screen h-[80vh] md:h-screen p-2 bg-[url('./assets/background.jpg')]">
+    <div className="flex justify-center items-center w-screen h-[80vh] md:h-screen p-2 lg:bg-[url('./assets/background.jpg')]">
       <div className="bg-white w-screen md:w-[32rem] lg:w-[32rem] px-7 lg:px-10 py-3 lg:py-5 flex flex-col gap-3 rounded-xl shadow-md ">
         <div className='flex justify-center text-green-600'>
           <UilWhatsapp size='3rem' />
