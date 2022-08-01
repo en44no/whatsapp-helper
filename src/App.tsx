@@ -18,7 +18,7 @@ function App() {
         <div className='flex justify-center text-green-600'>
           <UilWhatsapp size='3rem' />
         </div>
-        <h1 className='text-green-600 text-center drop-shadow-sm mb-2 font-bold text-xl'>¡Envía mensajes sin agendar contactos!</h1>
+        <h1 className='text-green-600 text-center drop-shadow-sm mb-2 font-bold text-md md:text-xl'>¡Envía mensajes sin agendar contactos!</h1>
         <label className='block text-md font-medium text-gray-700'>Número de teléfono</label>
         <div className='w-100 flex flex-col gap-2'>
           <input autoFocus type='number' value={phone} onChange={(e) => { setPhone(e.target.value), setShowPhoneError(false) }} className='border-none shadow-md rounded-lg h-10 pl-2 pr-2 w-full' placeholder='Escribe el número de teléfono' />
