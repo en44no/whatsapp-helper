@@ -1,15 +1,21 @@
 import { useState } from 'react';
 import { UilWhatsapp } from '@iconscout/react-unicons';
+import DropdownDemo from './components/SelectCountries/SelectCountries';
 
 function App() {
 
   const [phone, setPhone] = useState('');
-  const [showPhoneError, setShowPhoneError] = useState(false);
   const [text, setText] = useState('');
+  const [showPhoneError, setShowPhoneError] = useState(false);
 
   const sendWhatsappMessage = () => {
-    if (phone) window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${text}`);
+    if (phone.length > 5) window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${text}`);
     else setShowPhoneError(true);
+  }
+
+  const handlePhoneChange = (number: any) => {
+    setPhone(number);
+    setShowPhoneError(false);
   }
 
   return (
@@ -20,11 +26,8 @@ function App() {
         </div>
         <h1 className='text-green-600 text-center drop-shadow-sm mb-2 font-bold text-md md:text-xl'>¡Envía mensajes sin agendar contactos!</h1>
         <label className='block text-md font-medium text-gray-700'>Número de teléfono</label>
-        <div className='w-100 flex flex-col gap-2'>
-          <input autoFocus type='number' value={phone} onChange={(e) => { setPhone(e.target.value), setShowPhoneError(false) }} className='border-none shadow-md rounded-lg h-10 pl-2 pr-2 w-full' placeholder='Escribe el número de teléfono' />
-          {showPhoneError && (
-            <span className='w-100 shadow-md text-center bg-gray-400 px-2 py-1 rounded-lg font-medium text-sm text-white'>Debes especificar un número de teléfono</span>
-          )}
+        <div className='w-100 flex flex-col gap-2 rounded-lg'>
+          <DropdownDemo onChange={handlePhoneChange} showPhoneError={showPhoneError} />
         </div>
         <label className='block text-md font-medium text-gray-700'>Mensaje</label>
         <textarea value={text} onChange={(e) => { setText(e.target.value) }} onKeyPress={e => { e.key == 'Enter' && e.preventDefault() }} rows={5} className='border-none shadow-md rounded-lg pt-1 pl-2 pr-2 w-full' placeholder='Escribe el mensaje' />
