@@ -3,6 +3,22 @@
   padding-right: 1rem !important;
 }
 
+.p-dropdown:focus-within {
+  outline: none !important;
+}
+
+.p-dropdown {
+  --tw-shadow: none !important;
+  --tw-shadow-colored: none !important;
+  box-shadow: none !important;
+}
+
+.p-dropdown:active {
+  --tw-shadow: none !important;
+  --tw-shadow-colored: none !important;
+  box-shadow: none !important;
+}
+
 .p-inputtext {
   padding: 0.1rem 0.5rem !important;
 }
