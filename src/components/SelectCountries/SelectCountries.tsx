@@ -12,7 +12,7 @@ const SelectCountries = (props: any) => {
 
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [phoneMask, setPhoneMask] = useState();
+  const [phoneMask, setPhoneMask] = useState('');
 
   const countries = [
     {
@@ -1244,7 +1244,7 @@ const SelectCountries = (props: any) => {
   const onChangePhoneNumber = (number: any) => {
     let phone = `${selectedCountry!['dialCode']}${number.replace(/[^0-9]/g, '')}`;
     setPhoneNumber(phone);
-    onChange(phone);
+    onChange({ 'phone': phone, 'phoneMask': '99 999 999', 'dialCode': selectedCountry!['dialCode'] });
   }
 
   return (
@@ -1252,11 +1252,11 @@ const SelectCountries = (props: any) => {
       <div className="flex shadow-md rounded-lg">
         <Dropdown emptyFilterMessage='No se encontró un país con ese nombre' resetFilterOnHide showFilterClear className='w-5/12 md:w-4/12 flex items-center rounded-l-lg rounded-r-none border-t-0 border-l-0 border-b-0 border-r-2 border-gray-200 hover:!border-gray-200 active:!shadow-none h-10' value={selectedCountry} options={countries} onChange={(e: any) => onCountryChange(e.value)} optionLabel="name" filter filterBy="name" placeholder="Select a Country"
           valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
-        <InputMask slotChar='_' id="phone" className='w-7/12 md:w-8/12 rounded-r-lg rounded-l-none border-none h-10 pl-2 pr-2 ' mask="99 999 999" value={phoneMask} placeholder="99 999 999" onChange={(event: any) => onChangePhoneNumber(event.target.value)} autoFocus></InputMask>
+        <InputMask slotChar='_' autoClear={false} id="phone" className='w-7/12 md:w-8/12 rounded-r-lg rounded-l-none border-none h-10 pl-2 pr-2 ' mask="99 999 999" value={phoneMask} placeholder="99 999 999" onChange={(event: any) => onChangePhoneNumber(event.target.value)} autoFocus></InputMask>
       </div>
       <div className='text-end pr-2'>
         {showPhoneError ? (
-          <small className="text-red-700 font-medium">Debes especificar un número de teléfono</small>
+          <small className="text-red-700 font-medium">Debes especificar un número de teléfono válido</small>
         ) : (
           <small className="text-gray-400">Recuerda no escribir el código del país</small>
         )}

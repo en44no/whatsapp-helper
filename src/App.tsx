@@ -2,19 +2,31 @@ import { useState } from 'react';
 import { UilWhatsapp } from '@iconscout/react-unicons';
 import DropdownDemo from './components/SelectCountries/SelectCountries';
 
-function App() {
+interface DetailsModel {
+  phone: string;
+  dialCode: string;
+  phoneMask: string;
+}
 
-  const [phone, setPhone] = useState('');
+const App = () => {
   const [text, setText] = useState('');
   const [showPhoneError, setShowPhoneError] = useState(false);
+  const [details, setDetails] = useState({} as DetailsModel);
 
   const sendWhatsappMessage = () => {
-    if (phone.length > 5) window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${text}`);
-    else setShowPhoneError(true);
+    let numberMinusDialCodeLength = details.phone.length - details.dialCode.length;
+    let phoneMaskWithoutSpacesLength = details.phoneMask.replace(/\s/g, '').length;
+    if (numberMinusDialCodeLength == phoneMaskWithoutSpacesLength) {
+      if (phoneMaskWithoutSpacesLength > 0) {
+        let phoneWithoutPlus = details.phone.replace('+', '');
+        window.open(`https://api.whatsapp.com/send?phone=${phoneWithoutPlus}&text=${text}`);
+        setShowPhoneError(false);
+      }
+    } else setShowPhoneError(true);
   }
 
-  const handlePhoneChange = (number: any) => {
-    setPhone(number);
+  const handlePhoneChange = (details: DetailsModel) => {
+    setDetails(details);
     setShowPhoneError(false);
   }
 
@@ -41,4 +53,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
