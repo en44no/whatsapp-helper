@@ -30,7 +30,9 @@ function App() {
           <DropdownDemo onChange={handlePhoneChange} showPhoneError={showPhoneError} />
         </div>
         <label className='block text-md font-medium text-gray-700'>Mensaje</label>
-        <textarea value={text} onChange={(e) => { setText(e.target.value) }} onKeyPress={e => { e.key == 'Enter' && e.preventDefault() }} rows={5} className='border-none shadow-md rounded-lg pt-1 pl-2 pr-2 w-full' placeholder='Escribe el mensaje' />
+        <div className='shadow-md rounded-lg' >
+          <textarea value={text} onChange={(e) => { setText(e.target.value) }} onKeyPress={e => { e.key == 'Enter' && e.preventDefault() }} rows={5} className='border-none rounded-lg pt-1 pl-2 pr-2 w-full focus-visible:outline-none' placeholder='Escribe el mensaje' />
+        </div>
         <button onClick={() => sendWhatsappMessage()}
           className='flex  bg-green-600 text-white hover:bg-green-700/90 focus:outline-none focus:border-transparent focus:ring-0 gap-2 justify-center p-2 rounded-lg shadow-md text-md px-5 py-2.5 font-semibold items-center dark:focus:ring-[#3b5998]/55"'>
           <UilWhatsapp /> Crear conversación</button>

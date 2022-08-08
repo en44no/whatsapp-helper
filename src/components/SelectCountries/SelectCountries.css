@@ -21,9 +21,16 @@
 }
 
 .p-dropdown-panel {
-  min-width: 27rem !important;
-  width: 27rem !important;
   margin-top: 0.2rem !important;
+  min-width: 27rem;
+  width: 27rem;
+}
+
+@media (max-width: 768px) {
+  .p-dropdown-panel {
+    width: 100%;
+    min-width: 100%;
+  }
 }
 
 .pi-times:before {

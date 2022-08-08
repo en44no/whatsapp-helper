@@ -1225,7 +1225,7 @@ const SelectCountries = (props: any) => {
     if (option) {
       return (
         <div className="flex justify-center gap-2">
-          <img alt={option.name} src={`/assets/rounded-flags/${option.code}.svg`} className='w-6' />
+          <img alt={option.name} src={`assets/rounded-flags/${option.code}.svg`} className='w-6' />
           <div className='font-medium text-sm leading-normal'>({option.dialCode})</div>
         </div>
       );
@@ -1235,7 +1235,7 @@ const SelectCountries = (props: any) => {
   const countryOptionTemplate = (option: any) => {
     return (
       <div className="flex gap-2">
-        <img alt={option.name} src={`/assets/rounded-flags/${option.code}.svg`} className='w-6' />
+        <img alt={option.name} src={`assets/rounded-flags/${option.code}.svg`} className='w-6' />
         <div className='font-medium text-sm'>{option.name} ({option.dialCode})</div>
       </div>
     );
@@ -1248,11 +1248,11 @@ const SelectCountries = (props: any) => {
   }
 
   return (
-    <div>
+    <div className='position-relative'>
       <div className="flex shadow-md rounded-lg">
-        <Dropdown emptyFilterMessage='No se encontró un país con ese nombre' resetFilterOnHide showFilterClear style={{ 'width': '30%' }} className='flex items-center rounded-l-lg rounded-r-none border-t-0 border-l-0 border-b-0 border-r-2 border-gray-200 hover:!border-gray-200 active:!shadow-none h-10' value={selectedCountry} options={countries} onChange={(e: any) => onCountryChange(e.value)} optionLabel="name" filter filterBy="name" placeholder="Select a Country"
+        <Dropdown emptyFilterMessage='No se encontró un país con ese nombre' resetFilterOnHide showFilterClear className='w-5/12 md:w-4/12 flex items-center rounded-l-lg rounded-r-none border-t-0 border-l-0 border-b-0 border-r-2 border-gray-200 hover:!border-gray-200 active:!shadow-none h-10' value={selectedCountry} options={countries} onChange={(e: any) => onCountryChange(e.value)} optionLabel="name" filter filterBy="name" placeholder="Select a Country"
           valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
-        <InputMask slotChar='_' id="phone" style={{ 'width': '70%' }} className='rounded-r-lg rounded-l-none border-none h-10 pl-2 pr-2 ' mask="99 999 999" value={phoneMask} placeholder="99 999 999" onChange={(event: any) => onChangePhoneNumber(event.target.value)} autoFocus></InputMask>
+        <InputMask slotChar='_' id="phone" className='w-7/12 md:w-8/12 rounded-r-lg rounded-l-none border-none h-10 pl-2 pr-2 ' mask="99 999 999" value={phoneMask} placeholder="99 999 999" onChange={(event: any) => onChangePhoneNumber(event.target.value)} autoFocus></InputMask>
       </div>
       <div className='text-end pr-2'>
         {showPhoneError ? (
