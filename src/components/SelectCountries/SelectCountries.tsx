@@ -1225,7 +1225,7 @@ const SelectCountries = (props: any) => {
     if (option) {
       return (
         <div className="flex justify-center gap-2">
-          <img alt={option.name} src={`assets/rounded-flags/${option.code}.svg`} className='w-6' />
+          <img alt={option.name} src={`assets/rounded-flags/${option.code.toLowerCase()}.svg`} className='w-6' />
           <div className='font-medium text-sm leading-normal'>({option.dialCode})</div>
         </div>
       );
@@ -1235,7 +1235,7 @@ const SelectCountries = (props: any) => {
   const countryOptionTemplate = (option: any) => {
     return (
       <div className="flex gap-2">
-        <img alt={option.name} src={`assets/rounded-flags/${option.code}.svg`} className='w-6' />
+        <img alt={option.name} src={`assets/rounded-flags/${option.code.toLowerCase()}.svg`} className='w-6' />
         <div className='font-medium text-sm'>{option.name} ({option.dialCode})</div>
       </div>
     );
