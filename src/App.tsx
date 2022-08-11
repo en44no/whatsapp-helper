@@ -1,53 +1,57 @@
 import { useState } from 'react';
 import { UilWhatsapp } from '@iconscout/react-unicons';
-import DropdownDemo from './components/SelectCountries/SelectCountries';
+import DropdownDemo from './components/SelectCountries';
+import EditorDemo from './components/TextEditor';
 
-interface DetailsModel {
-  phone: string;
-  dialCode: string;
-  phoneMask: string;
+interface Phone {
+  number: string;
+  isValid: boolean;
 }
 
 const App = () => {
-  const [text, setText] = useState('');
+  const [textToSend, setTextToSend] = useState('');
   const [showPhoneError, setShowPhoneError] = useState(false);
-  const [details, setDetails] = useState({} as DetailsModel);
+  const [phoneNumber, setPhoneNumber] = useState<Phone>();
 
   const sendWhatsappMessage = () => {
-    let numberMinusDialCodeLength = details.phone.length - details.dialCode.length;
-    let phoneMaskWithoutSpacesLength = details.phoneMask.replace(/\s/g, '').length;
-    if (numberMinusDialCodeLength == phoneMaskWithoutSpacesLength) {
-      if (phoneMaskWithoutSpacesLength > 0) {
-        let phoneWithoutPlus = details.phone.replace('+', '');
-        window.open(`https://api.whatsapp.com/send?phone=${phoneWithoutPlus}&text=${text}`);
-        setShowPhoneError(false);
-      }
+    debugger;
+    if (phoneNumber && phoneNumber.isValid) {
+      let phoneWithoutPlus = phoneNumber.number.replace('+', '');
+      window.open(`https://api.whatsapp.com/send?phone=${phoneWithoutPlus}&text=${textToSend}`);
+      setShowPhoneError(false);
     } else setShowPhoneError(true);
   }
 
-  const handlePhoneChange = (details: DetailsModel) => {
-    setDetails(details);
+  const handlePhoneChange = (phoneNumber: Phone) => {
+    setPhoneNumber(phoneNumber);
     setShowPhoneError(false);
+  }
+
+  const handleTextChange = (text: string) => {
+    setTextToSend(text);
   }
 
   return (
     <div className="flex justify-center items-center w-screen h-[90vh] md:h-screen p-2 bg-[#e6f0f1]">
-      <div className="bg-white w-screen md:w-[32rem] lg:w-[32rem] px-7 lg:px-10 py-3 lg:py-5 flex flex-col gap-3 rounded-xl shadow-md ">
-        <div className='flex justify-center text-green-600'>
-          <UilWhatsapp size='3rem' />
+      <div className='relative bg-white w-screen md:w-[32rem] lg:w-[32rem] flex flex-col gap-3 rounded-xl shadow-md '>
+        <div className="overflow-auto px-7 lg:px-10 py-3 lg:py-5 ">
+          <div className='flex justify-center text-green-600'>
+            <UilWhatsapp size='3rem' />
+          </div>
+          <h1 className='text-green-600 text-center drop-shadow-sm mb-2 font-bold text-md md:text-xl mt-2'>¡Envía mensajes sin agendar contactos!</h1>
+          <div className='w-100 flex flex-col gap-2 rounded-lg mt-2 mb-2'>
+            <DropdownDemo onChange={handlePhoneChange} />
+          </div>
+          <EditorDemo getText={handleTextChange} />
+          <button onClick={() => sendWhatsappMessage()}
+            className='w-full flex mt-4 bg-green-600 text-white hover:bg-green-700/90 focus:outline-none focus:border-transparent focus:ring-0 gap-2 justify-center p-2 rounded-lg shadow-md text-md px-5 py-2.5 font-semibold items-center dark:focus:ring-[#3b5998]/55"'>
+            <UilWhatsapp /> Crear conversación</button>
+          {showPhoneError && (
+            <div className='bg-red-100 rounded-lg text-red-900 p-1 font-medium text-center mt-2'>
+              <p>Debes ingresar un número de teléfono válido</p>
+            </div>
+          )}
         </div>
-        <h1 className='text-green-600 text-center drop-shadow-sm mb-2 font-bold text-md md:text-xl'>¡Envía mensajes sin agendar contactos!</h1>
-        <label className='block text-md font-medium text-gray-700'>Número de teléfono</label>
-        <div className='w-100 flex flex-col gap-2 rounded-lg'>
-          <DropdownDemo onChange={handlePhoneChange} showPhoneError={showPhoneError} />
-        </div>
-        <label className='block text-md font-medium text-gray-700'>Mensaje</label>
-        <div className='shadow-md rounded-lg' >
-          <textarea value={text} onChange={(e) => { setText(e.target.value) }} onKeyPress={e => { e.key == 'Enter' && e.preventDefault() }} rows={5} className='border-none rounded-lg pt-1 pl-2 pr-2 w-full focus-visible:outline-none' placeholder='Escribe el mensaje' />
-        </div>
-        <button onClick={() => sendWhatsappMessage()}
-          className='flex  bg-green-600 text-white hover:bg-green-700/90 focus:outline-none focus:border-transparent focus:ring-0 gap-2 justify-center p-2 rounded-lg shadow-md text-md px-5 py-2.5 font-semibold items-center dark:focus:ring-[#3b5998]/55"'>
-          <UilWhatsapp /> Crear conversación</button>
       </div>
     </div >
   )

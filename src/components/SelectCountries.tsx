@@ -1,18 +1,17 @@
 
 import { useState, useEffect } from 'react';
 import { Dropdown } from 'primereact/dropdown';
-import './SelectCountries.css';
 import 'primeicons/primeicons.css';
 import 'primereact/resources/themes/lara-light-indigo/theme.css';
 import 'primereact/resources/primereact.css';
-import { InputMask } from 'primereact/inputmask';
+import PhoneInput, { formatPhoneNumber, formatPhoneNumberIntl, isValidPhoneNumber } from 'react-phone-number-input/input';
+import { FaCheckCircle } from 'react-icons/fa';
+
 
 const SelectCountries = (props: any) => {
-  const { onChange, showPhoneError } = props;
-
+  const { onChange } = props;
   const [selectedCountry, setSelectedCountry] = useState(null);
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [phoneMask, setPhoneMask] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState<string | undefined>();
 
   const countries = [
     {
@@ -1225,8 +1224,8 @@ const SelectCountries = (props: any) => {
     if (option) {
       return (
         <div className="flex justify-center gap-2">
-          <img alt={option.name} src={`assets/rounded-flags/${option.code.toLowerCase()}.svg`} className='w-6' />
-          <div className='font-medium text-sm leading-normal'>({option.dialCode})</div>
+          <img alt={option.name} src={`assets/rounded-flags/${option.code.toLowerCase()}.svg`} className='w-6' draggable={false} />
+          <div className='font-medium text-sm leading-normal text-black'>({option.dialCode})</div>
         </div>
       );
     }
@@ -1235,32 +1234,48 @@ const SelectCountries = (props: any) => {
   const countryOptionTemplate = (option: any) => {
     return (
       <div className="flex gap-2">
-        <img alt={option.name} src={`assets/rounded-flags/${option.code.toLowerCase()}.svg`} className='w-6' />
+        <img alt={option.name} src={`assets/rounded-flags/${option.code.toLowerCase()}.svg`} className='w-6' draggable={false} />
         <div className='font-medium text-sm'>{option.name} ({option.dialCode})</div>
       </div>
     );
   }
 
-  const onChangePhoneNumber = (number: any) => {
-    let phone = `${selectedCountry!['dialCode']}${number.replace(/[^0-9]/g, '')}`;
-    setPhoneNumber(phone);
-    onChange({ 'phone': phone, 'phoneMask': '99 999 999', 'dialCode': selectedCountry!['dialCode'] });
+  const onChangePhoneNumber = (phoneNumber: any) => {
+    setPhoneNumber(phoneNumber);
+    onChange({ 'number': phoneNumber, 'isValid': isValidPhoneNumber(phoneNumber) });
   }
 
   return (
     <div className='position-relative'>
-      <div className="flex shadow-md rounded-lg">
-        <Dropdown emptyFilterMessage='No se encontró un país con ese nombre' resetFilterOnHide showFilterClear className='w-5/12 md:w-4/12 flex items-center rounded-l-lg rounded-r-none border-t-0 border-l-0 border-b-0 border-r-2 border-gray-200 hover:!border-gray-200 active:!shadow-none h-10' value={selectedCountry} options={countries} onChange={(e: any) => onCountryChange(e.value)} optionLabel="name" filter filterBy="name" placeholder="Select a Country"
-          valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
-        <InputMask slotChar='_' autoClear={false} id="phone" className='w-7/12 md:w-8/12 rounded-r-lg rounded-l-none border-none h-10 pl-2 pr-2 ' mask="99 999 999" value={phoneMask} placeholder="99 999 999" onChange={(event: any) => onChangePhoneNumber(event.target.value)} autoFocus></InputMask>
-      </div>
-      <div className='text-end pr-2'>
-        {showPhoneError ? (
-          <small className="text-red-700 font-medium">Debes especificar un número de teléfono válido</small>
-        ) : (
+      <div className='flex justify-between items-center mb-2'>
+        <label className='block text-md font-medium text-gray-700'>Número de teléfono</label>
+        <div className='text-end pr-2'>
           <small className="text-gray-400">Recuerda no escribir el código del país</small>
-        )}
+        </div>
       </div>
+      <div className="flex shadow-md rounded-lg">
+        <Dropdown emptyFilterMessage='No se encontró un país con ese nombre' resetFilterOnHide showFilterClear className='w-5/12 md:w-4/12 flex items-center rounded-l-lg rounded-r-none border-none bg-[#f8f9fa] active:!shadow-none h-10' value={selectedCountry} options={countries} onChange={(e: any) => onCountryChange(e.value)} optionLabel="name" filter filterBy="name" placeholder="Select a Country"
+          valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
+        <div className='relative w-7/12 md:w-8/12'>
+          <PhoneInput international country={selectedCountry ? selectedCountry['code'] : 'UY'} value={phoneNumber} onChange={(e: any) => onChangePhoneNumber(e)} className='w-100 pr-10 rounded-r-lg rounded-l-none border-none h-10 pl-2 focus-visible:outline-none' />
+          {phoneNumber && isValidPhoneNumber(phoneNumber) && (
+            <FaCheckCircle fontSize='1.2rem' className='text-green-700 absolute right-2 top-3' />
+          )}
+        </div>
+      </div>
+      {phoneNumber && isValidPhoneNumber(phoneNumber) && (
+        <div className='mt-2 rounded-lg'>
+          <div className='bg-[#f8f9fa] p-2 flex justify-between items-center rounded-tl-lg rounded-tr-lg'>
+            <h6 className='font-medium text-gray-700'>Nacional</h6>
+            <h6 className='font-semibold'> {phoneNumber && formatPhoneNumber(phoneNumber)}</h6>
+          </div>
+          <hr />
+          <div className='bg-[#f8f9fa] p-2 flex justify-between items-center rounded-bl-lg rounded-br-lg'>
+            <h6 className='font-medium text-gray-700'>Internacional</h6>
+            <h6 className='font-semibold'> {phoneNumber && formatPhoneNumberIntl(phoneNumber)}</h6>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
