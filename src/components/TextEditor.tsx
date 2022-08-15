@@ -17,39 +17,42 @@ const EditorDemo = (props: any) => {
   }
 
   const parseHtmlToWhatsapp = (htmlText: string) => {
-    console.log(`htmlText ${htmlText}`);
     let formattedTextForWhatsapp = htmlText;
+
+    const regex = / +<\//i;
+
+    //replace spaces
+    formattedTextForWhatsapp = formattedTextForWhatsapp.replace(regex, '</');
     //find <p> and replace with nothing
     formattedTextForWhatsapp = formattedTextForWhatsapp.replace(/<p>/g, '');
-    //find </p> and replace with nothing
+    //find </p> and replace with one space
     formattedTextForWhatsapp = formattedTextForWhatsapp.replace(/<\/p>/g, '');
 
-    //find spaces between <strong> to first letter and replace with nothing
-    formattedTextForWhatsapp = formattedTextForWhatsapp.replace(/<strong> /g, '');
+    //replace spaces
+    formattedTextForWhatsapp = formattedTextForWhatsapp.replace(regex, '</');
     //find <strong> and replace with *
     formattedTextForWhatsapp = formattedTextForWhatsapp.replace(/<strong>/g, '*');
     //find </strong> and replace with *
-    formattedTextForWhatsapp = formattedTextForWhatsapp.replace(/<\/strong>/g, '*');
+    formattedTextForWhatsapp = formattedTextForWhatsapp.replace(/<\/strong>/g, '* ');
 
-    //remove spaces between first letter after <em> and last before </em>
-    formattedTextForWhatsapp = formattedTextForWhatsapp.replace(/<em>([a-zA-Z])/g, '<em>$1');
+    //replace spaces
+    formattedTextForWhatsapp = formattedTextForWhatsapp.replace(regex, '</');
     //find <em> and replace with _
     formattedTextForWhatsapp = formattedTextForWhatsapp.replace(/<em>/g, '_');
     //find </em> and replace with _
-    formattedTextForWhatsapp = formattedTextForWhatsapp.replace(/<\/em>/g, '_');
+    formattedTextForWhatsapp = formattedTextForWhatsapp.replace(/<\/em>/g, '_ ');
 
-    //remove spaces between first letter after <s> and last before </s>
-    formattedTextForWhatsapp = formattedTextForWhatsapp.replace(/<s>([a-zA-Z])/g, '<s>$1');
+    //replace spaces
+    formattedTextForWhatsapp = formattedTextForWhatsapp.replace(regex, '</');
     //find <s> and replace with ~
     formattedTextForWhatsapp = formattedTextForWhatsapp.replace(/<s>/g, '~');
     //find </s> and replace with ~
-    formattedTextForWhatsapp = formattedTextForWhatsapp.replace(/<\/s>/g, '~');
+    formattedTextForWhatsapp = formattedTextForWhatsapp.replace(/<\/s>/g, '~ ');
 
     //find <br> and replace with \n
-    formattedTextForWhatsapp = formattedTextForWhatsapp.replace(/<br>/g, '\n');
+    formattedTextForWhatsapp = formattedTextForWhatsapp.replace(/<br>/g, '1');
     getText(formattedTextForWhatsapp);
     setText(formattedTextForWhatsapp);
-    console.log(`formattedTextForWhatsapp ${formattedTextForWhatsapp}`);
   }
 
   const header = renderHeader();

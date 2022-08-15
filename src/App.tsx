@@ -47,7 +47,7 @@ const App = () => {
             className='w-full flex mt-4 bg-green-600 text-white hover:bg-green-700/90 focus:outline-none focus:border-transparent focus:ring-0 gap-2 justify-center p-2 rounded-lg shadow-md text-md px-5 py-2.5 font-semibold items-center dark:focus:ring-[#3b5998]/55"'>
             <UilWhatsapp /> Crear conversación</button>
           {showPhoneError && (
-            <div className='bg-red-100 rounded-lg text-red-900 p-1 font-medium text-center mt-2'>
+            <div className='bg-red-100 rounded-lg text-red-900 p-1 font-medium text-sm text-center mt-2'>
               <p>Debes ingresar un número de teléfono válido</p>
             </div>
           )}

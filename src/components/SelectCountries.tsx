@@ -1240,24 +1240,22 @@ const SelectCountries = (props: any) => {
     );
   }
 
-  const onChangePhoneNumber = (phoneNumber: any) => {
-    setPhoneNumber(phoneNumber);
-    onChange({ 'number': phoneNumber, 'isValid': isValidPhoneNumber(phoneNumber) });
+  const onChangePhoneNumber = (phoneNumber: string) => {
+    let checkedPhoneNumber = phoneNumber ? phoneNumber : ''
+    setPhoneNumber(checkedPhoneNumber);
+    onChange({ 'number': checkedPhoneNumber, 'isValid': isValidPhoneNumber(checkedPhoneNumber) });
   }
 
   return (
     <div className='position-relative'>
       <div className='flex justify-between items-center mb-2'>
         <label className='block text-md font-medium text-gray-700'>Número de teléfono</label>
-        <div className='text-end pr-2'>
-          <small className="text-gray-400">Recuerda no escribir el código del país</small>
-        </div>
       </div>
       <div className="flex shadow-md rounded-lg">
         <Dropdown emptyFilterMessage='No se encontró un país con ese nombre' resetFilterOnHide showFilterClear className='w-5/12 md:w-4/12 flex items-center rounded-l-lg rounded-r-none border-none bg-[#f8f9fa] active:!shadow-none h-10' value={selectedCountry} options={countries} onChange={(e: any) => onCountryChange(e.value)} optionLabel="name" filter filterBy="name" placeholder="Select a Country"
           valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
         <div className='relative w-7/12 md:w-8/12'>
-          <PhoneInput international country={selectedCountry ? selectedCountry['code'] : 'UY'} value={phoneNumber} onChange={(e: any) => onChangePhoneNumber(e)} className='w-100 pr-10 rounded-r-lg rounded-l-none border-none h-10 pl-2 focus-visible:outline-none' />
+          <PhoneInput international country={selectedCountry ? selectedCountry['code'] : 'UY'} value={phoneNumber} onChange={(e: any) => onChangePhoneNumber(e)} placeholder='99 999 999' className='w-100 pr-10 rounded-r-lg rounded-l-none border-none h-10 pl-2 focus-visible:outline-none' />
           {phoneNumber && isValidPhoneNumber(phoneNumber) && (
             <FaCheckCircle fontSize='1.2rem' className='text-green-700 absolute right-2 top-3' />
           )}
