@@ -14,7 +14,6 @@ const App = () => {
   const [phoneNumber, setPhoneNumber] = useState<Phone>();
 
   const sendWhatsappMessage = () => {
-    debugger;
     if (phoneNumber && phoneNumber.isValid) {
       let phoneWithoutPlus = phoneNumber.number.replace('+', '');
       window.open(`https://api.whatsapp.com/send?phone=${phoneWithoutPlus}&text=${textToSend}`);
