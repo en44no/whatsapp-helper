@@ -21,10 +21,11 @@ const EditorDemo = (props: any) => {
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(text);
-    handleShowToastNotification(true);
+    handleShowToastNotification('Mensaje copiado al portapapeles.');
   }
 
   const parseHtmlToWhatsapp = (htmlText: string) => {
+    if (!htmlText) setText(''); getText('');
     let formattedTextForWhatsapp = htmlText;
 
     const regex = / +<\//i;
@@ -69,7 +70,7 @@ const EditorDemo = (props: any) => {
     <div>
       <label className='block text-md font-medium text-gray-700 mb-2'>Mensaje</label>
       <div className='border-none rounded-lg shadow-md w-full focus-visible:outline-none relative'>
-        <FaRegCopy onClick={() => copyToClipboard()} className='absolute top-3 right-3 cursor-pointer' style={{ 'color': '#63696e', 'fontSize': '1.1rem' }} />
+        <FaRegCopy onClick={() => copyToClipboard()} className='absolute top-3 right-3 cursor-pointer text-[#6c757d] hover:text-[#495057] active:text-[#16af68]' style={{ 'fontSize': '1.1rem' }} />
         <Editor headerTemplate={header} onPaste={(e) => { e.preventDefault(); return false; }} style={{ height: '180px' }} value={text} onTextChange={(e) => parseHtmlToWhatsapp(e.htmlValue!)} placeholder='Escribe el mensaje' />
       </div>
     </div>

@@ -4,6 +4,7 @@ import DropdownDemo from './components/SelectCountries';
 import EditorDemo from './components/TextEditor';
 import ToastNotification from './components/ToastNotification';
 import WHState from './context/WHState.jsx'
+import Social from './components/Social';
 
 interface Phone {
   number: string;
@@ -56,6 +57,7 @@ const App = () => {
             )}
           </div>
         </div>
+        <Social />
       </div >
     </WHState>
   )

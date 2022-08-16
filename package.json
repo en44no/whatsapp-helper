@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@heroicons/react": "^1.0.6",
     "@iconscout/react-unicons": "^1.1.6",
     "libphonenumber-js": "^1.10.12",
     "primeicons": "^5.0.0",

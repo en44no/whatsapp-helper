@@ -3,8 +3,10 @@ import WHContext from './WHContext';
 
 const WHState = (props) => {
   const [showToastNotification, setShowToastNotification] = useState(false);
+  const [toastNotificationText, setToastNotificationText] = useState('');
 
-  const handleShowToastNotification = () => {
+  const handleShowToastNotification = (text) => {
+    setToastNotificationText(text);
     setShowToastNotification(true);
     setTimeout(() => {
       setShowToastNotification(false);
@@ -19,6 +21,7 @@ const WHState = (props) => {
     <WHContext.Provider
       value={{
         showToastNotification,
+        toastNotificationText,
         handleShowToastNotification,
         handleHideToastNotification
       }}

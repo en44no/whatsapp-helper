@@ -86,3 +86,19 @@
   color: #6c757d !important;
   cursor: pointer !important;
 }
+
+.github-icon:hover {
+  color: #888888;
+}
+
+.linkedin-icon:hover {
+  color: #2561a9;
+}
+
+.email-icon:hover {
+  color: #DA3D3D;
+}
+
+.website-icon:hover {
+  color: #48a41e;
+}
