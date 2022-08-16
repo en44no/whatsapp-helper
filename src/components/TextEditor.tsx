@@ -34,7 +34,7 @@ const EditorDemo = (props: any) => {
     //find <p> and replace with nothing
     formattedTextForWhatsapp = formattedTextForWhatsapp.replace(/<p>/g, '');
     //find </p> and replace with one space
-    formattedTextForWhatsapp = formattedTextForWhatsapp.replace(/<\/p>/g, '');
+    formattedTextForWhatsapp = formattedTextForWhatsapp.replace(/<\/p>/g, ' ');
 
     //replace spaces
     formattedTextForWhatsapp = formattedTextForWhatsapp.replace(regex, '</');
@@ -58,7 +58,7 @@ const EditorDemo = (props: any) => {
     formattedTextForWhatsapp = formattedTextForWhatsapp.replace(/<\/s>/g, '~ ');
 
     //find <br> and replace with \n
-    formattedTextForWhatsapp = formattedTextForWhatsapp.replace(/<br>/g, '1');
+    formattedTextForWhatsapp = formattedTextForWhatsapp.replace(/<br>/g, '\n');
     getText(formattedTextForWhatsapp);
     setText(formattedTextForWhatsapp);
   }
