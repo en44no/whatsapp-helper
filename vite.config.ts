@@ -11,7 +11,7 @@ export default defineConfig({
       base: "/",
       srcDir: "src",
       filename: "sw.ts",
-      includeAssets: ["/whatsapp-icon.png"],
+      includeAssets: ["/assets/whatsapp-icon.png"],
       strategies: "injectManifest",
       manifest: {
         name: "Test Project",
@@ -22,17 +22,17 @@ export default defineConfig({
         background_color: "#ffffff",
         icons: [
           {
-            src: "whatsapp-icon.png",
+            src: "/assets/whatsapp-icon.png",
             sizes: "192x192",
             type: "image/png",
           },
           {
-            src: "/whatsapp-icon.png",
+            src: "/assets/whatsapp-icon.png",
             sizes: "512x512",
             type: "image/png",
           },
           {
-            src: "whatsapp-icon.png",
+            src: "/assets/whatsapp-icon.png",
             sizes: "512x512",
             type: "image/png",
             purpose: "any maskable",
