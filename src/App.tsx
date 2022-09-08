@@ -35,9 +35,9 @@ const App = () => {
 
   return (
     <WHState>
-      <div className="flex justify-center items-center w-screen h-[90vh] md:h-screen p-2 bg-[#e6f0f1]">
+      <div className="flex justify-center items-center w-screen h-[90vh] md:h-screen p-2 md:bg-[#e6f0f1]">
         <ToastNotification />
-        <div className='relative bg-white w-screen md:w-[32rem] lg:w-[32rem] flex flex-col gap-3 rounded-xl shadow-md '>
+        <div className='relative bg-white w-screen md:w-[32rem] lg:w-[32rem] flex flex-col gap-3 rounded-xl md:shadow-md'>
           <div className="overflow-auto px-7 lg:px-10 py-3 lg:py-5 ">
             <div className='flex justify-center text-green-600'>
               <UilWhatsapp size='3rem' />

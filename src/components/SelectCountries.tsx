@@ -1255,7 +1255,7 @@ const SelectCountries = (props: any) => {
         <Dropdown emptyFilterMessage='No se encontró un país con ese nombre' resetFilterOnHide showFilterClear className='w-5/12 md:w-4/12 flex items-center rounded-l-lg rounded-r-none border-none bg-[#f8f9fa] active:!shadow-none h-10' value={selectedCountry} options={countries} onChange={(e: any) => onCountryChange(e.value)} optionLabel="name" filter filterBy="name" placeholder="Select a Country"
           valueTemplate={selectedCountryTemplate} itemTemplate={countryOptionTemplate} />
         <div className='relative w-7/12 md:w-8/12'>
-          <PhoneInput international country={selectedCountry ? selectedCountry['code'] : 'UY'} value={phoneNumber} onChange={(e: any) => onChangePhoneNumber(e)} placeholder='99 999 999' className='w-100 pr-10 rounded-r-lg rounded-l-none border-none h-10 pl-2 focus-visible:outline-none' />
+          <PhoneInput international country={selectedCountry ? selectedCountry['code'] : 'UY'} value={phoneNumber} onChange={(e: any) => onChangePhoneNumber(e)} placeholder='99 999 999' className='rounded-r-lg rounded-l-none border-none h-10 pl-2 focus-visible:outline-none' />
           {phoneNumber && isValidPhoneNumber(phoneNumber) && (
             <FaCheckCircle fontSize='1.2rem' className='text-green-700 absolute right-2 top-3' />
           )}
